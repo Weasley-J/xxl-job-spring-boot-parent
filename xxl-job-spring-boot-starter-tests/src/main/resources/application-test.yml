@@ -1,0 +1,10 @@
+# job配置
+xxl:
+  job:
+    access-token: default_token
+    admin-addresses: http://127.0.0.1:8081/job
+    executor:
+      app-name: xxl-job-spring-boot-starter-tests
+      address: http://fgimax2.fgnwctvip.com:${server.port}
+      port: 9999
+      log-path: ./logs

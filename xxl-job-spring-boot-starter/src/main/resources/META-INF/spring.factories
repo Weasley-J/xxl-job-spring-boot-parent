@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  io.github.weasleyj.xxljob.config.XxlJobConfiguration,\
+  io.github.weasleyj.xxljob.config.XxlJobWebMvcConfig,\
+  io.github.weasleyj.xxljob.interceptor.XxlJobInterceptor
