@@ -20,6 +20,8 @@ import javax.validation.constraints.NotBlank;
 public class XxlJobProperties {
     /**
      * 启用http server代理转发请求至xxl-job内置netty服务器
+     * <p>
+     * {@code enableProxy}为false的情况下job客户端必须开启{@code executor}的端口，否则 'xxl-job-admin' 无法回调客户端
      */
     private boolean enableProxy = true;
     /**
