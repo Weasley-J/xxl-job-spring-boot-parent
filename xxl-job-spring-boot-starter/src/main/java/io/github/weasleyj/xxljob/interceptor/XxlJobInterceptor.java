@@ -39,6 +39,7 @@ import static com.xxl.job.core.util.XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN;
 @Slf4j
 @Component
 public class XxlJobInterceptor implements HandlerInterceptor {
+    private static final int TIMEOUT = 3;
     private final XxlJobProperties jobProperties;
 
     public XxlJobInterceptor(XxlJobProperties jobProperties) {
@@ -61,27 +62,27 @@ public class XxlJobInterceptor implements HandlerInterceptor {
             String uri = StringUtils.removeStart(request.getRequestURI(), "/");
             @SuppressWarnings({"all"}) ReturnT result = null;
             if ("beat".equals(uri)) {
-                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, "", String.class);
+                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), TIMEOUT, "", String.class);
             }
             if ("idleBeat".equals(uri)) {
                 IdleBeatParam idleBeatParam = JacksonUtil.readValue(requestJson, new TypeReference<IdleBeatParam>() {
                 });
-                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, idleBeatParam, String.class);
+                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), TIMEOUT, idleBeatParam, String.class);
             }
             if ("run".equals(uri)) {
                 TriggerParam triggerParam = JacksonUtil.readValue(requestJson, new TypeReference<TriggerParam>() {
                 });
-                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, triggerParam, String.class);
+                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), TIMEOUT, triggerParam, String.class);
             }
             if ("kill".equals(uri)) {
                 KillParam killParam = JacksonUtil.readValue(requestJson, new TypeReference<KillParam>() {
                 });
-                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, killParam, String.class);
+                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), TIMEOUT, killParam, String.class);
             }
             if ("log".equals(uri)) {
                 LogParam logParam = JacksonUtil.readValue(requestJson, new TypeReference<LogParam>() {
                 });
-                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, logParam, LogResult.class);
+                result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), TIMEOUT, logParam, LogResult.class);
             }
             if (log.isDebugEnabled()) {
                 log.debug("收到xxl-job的回调请求，uri：{}，入参：{}，执行结果：{}", request.getRequestURI(), requestJson, JacksonUtil.toJson(result));
