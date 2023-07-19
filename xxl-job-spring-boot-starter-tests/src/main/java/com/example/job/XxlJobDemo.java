@@ -21,7 +21,7 @@ public class XxlJobDemo {
         XxlJobHelper.log("这是一个xxl-job的测试程序 job入参 {}", args);
         log.info("这是一个xxl-job的测试程序 job入参 {}", args);
         ReturnT<String> success = ReturnT.SUCCESS;
-        success.setContent(args);
+        success.setContent("你好：这是一个 xxl-job 增强的示例！");
         return success;
     }
 }

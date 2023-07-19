@@ -29,7 +29,7 @@ import static com.xxl.job.core.util.XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN;
 /**
  * 将<b>xxl-job-admin</b>的回调请求转发给<b>job服务</b>内部<b>xxl-job</b>内嵌的<b>Netty</b>服务器
  * <p>
- * 一个端口搞定, 避免服务器上一定要开放xxl-job执行器端口的白名单才能用接收<b>xxl-job-admin</b>的回调
+ * 一个端口搞定, 避免服务器上一定要开放xxl-job执行器端口的白名单才能用接收<b>xxl-job-admin</b>的回调，多的安全组端口易被攻击
  *
  * @author weasley
  * @version 1.0.0
