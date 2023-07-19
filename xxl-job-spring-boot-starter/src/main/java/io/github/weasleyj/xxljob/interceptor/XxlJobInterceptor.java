@@ -1,7 +1,7 @@
 package io.github.weasleyj.xxljob.interceptor;
 
-import cn.hutool.core.lang.TypeReference;
-import cn.hutool.json.JSONUtil;
+import cn.alphahub.dtt.plus.util.JacksonUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.xxl.job.core.biz.model.IdleBeatParam;
 import com.xxl.job.core.biz.model.KillParam;
 import com.xxl.job.core.biz.model.LogParam;
@@ -56,43 +56,41 @@ public class XxlJobInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (StringUtils.isNotBlank(request.getHeader(XXL_JOB_ACCESS_TOKEN))) {
             if (!jobProperties.isEnableProxy()) return true;
-
             String requestJson = httpInputStreamToJsonString(request);
             String nettyRequestUrl = "http://localhost:" + jobProperties.getExecutor().getPort() + request.getRequestURI();
             String uri = StringUtils.removeStart(request.getRequestURI(), "/");
             @SuppressWarnings({"all"}) ReturnT result = null;
-
             if ("beat".equals(uri)) {
                 result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, "", String.class);
             }
             if ("idleBeat".equals(uri)) {
-                IdleBeatParam idleBeatParam = JSONUtil.toBean(requestJson, new TypeReference<IdleBeatParam>() {
-                }, true);
+                IdleBeatParam idleBeatParam = JacksonUtil.readValue(requestJson, new TypeReference<IdleBeatParam>() {
+                });
                 result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, idleBeatParam, String.class);
             }
             if ("run".equals(uri)) {
-                TriggerParam triggerParam = JSONUtil.toBean(requestJson, new TypeReference<TriggerParam>() {
-                }, true);
+                TriggerParam triggerParam = JacksonUtil.readValue(requestJson, new TypeReference<TriggerParam>() {
+                });
                 result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, triggerParam, String.class);
             }
             if ("kill".equals(uri)) {
-                KillParam killParam = JSONUtil.toBean(requestJson, new TypeReference<KillParam>() {
-                }, true);
+                KillParam killParam = JacksonUtil.readValue(requestJson, new TypeReference<KillParam>() {
+                });
                 result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, killParam, String.class);
             }
             if ("log".equals(uri)) {
-                LogParam logParam = JSONUtil.toBean(requestJson, new TypeReference<LogParam>() {
-                }, true);
+                LogParam logParam = JacksonUtil.readValue(requestJson, new TypeReference<LogParam>() {
+                });
                 result = XxlJobRemotingUtil.postBody(nettyRequestUrl, request.getHeader(XXL_JOB_ACCESS_TOKEN), 1, logParam, LogResult.class);
             }
             if (log.isDebugEnabled()) {
-                log.debug("收到xxl-job的回调请求，uri：{}，入参：{}，执行结果：{}", request.getRequestURI(), requestJson, JSONUtil.toJsonStr(result));
+                log.debug("收到xxl-job的回调请求，uri：{}，入参：{}，执行结果：{}", request.getRequestURI(), requestJson, JacksonUtil.toJson(result));
             }
             if (null != result) {
                 response.setStatus(HttpServletResponse.SC_OK);
                 response.setContentType("application/json;charset=utf-8");
                 PrintWriter writer = response.getWriter();
-                writer.println(JSONUtil.toJsonStr(result));
+                writer.println(JacksonUtil.toJson(result));
                 writer.flush();
                 writer.close();
                 return false;

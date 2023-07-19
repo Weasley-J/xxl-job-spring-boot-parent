@@ -37,13 +37,15 @@ public class XxlJobProperties {
      * job执行器元数据
      */
     @NestedConfigurationProperty
-    private ExecutorProperties executor;
+    private JobExecutorProperties executor;
 
     /**
-     * job执行器元数据
+     * Job执行器元数据
+     *
+     * @implSpec Job客户端元数据
      */
     @Data
-    public static class ExecutorProperties {
+    public static class JobExecutorProperties {
         /**
          * 执行器注册 [选填]：优先使用该配置作为注册地址，为空时使用内嵌服务 ”IP:PORT“ 作为注册地址。从而更灵活的支持容器类型执行器动态IP和动态映射端口问题。
          */
@@ -57,9 +59,11 @@ public class XxlJobProperties {
          */
         private String ip;
         /**
-         * 内置netty执行器端口号 [选填]：小于等于0则自动获取；默认端口为9999，单机部署多个执行器时，注意要配置不同执行器端口；
+         * 内置netty执行器端口号（无需配置）
+         *
+         * @apiNote 不需要配置，程序自动启动会自动获取一个可用的tcp端口
          */
-        private Integer port = 9999;
+        private Integer port;
         /**
          * 执行器运行日志文件存储磁盘路径 [选填] ：需要对该路径拥有读写权限；为空则使用默认路径；
          */

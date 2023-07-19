@@ -1,9 +1,9 @@
-logging:
-  level:
-    io.github.weasleyj.xxljob.interceptor.XxlJobInterceptor: debug
+#logging:
+#  level:
+#    io.github.weasleyj.xxljob.interceptor.XxlJobInterceptor: debug
 
 server:
-  port: 8081
+  port: 8080
 
 spring:
   profiles:

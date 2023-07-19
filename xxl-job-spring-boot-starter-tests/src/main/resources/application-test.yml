@@ -6,5 +6,4 @@ xxl:
     executor:
       app-name: xxl-job-spring-boot-starter-tests
       address: http://fgimax2.fgnwctvip.com:${server.port}
-      port: 9999
       log-path: ./logs
