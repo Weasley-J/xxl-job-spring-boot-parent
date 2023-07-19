@@ -55,8 +55,10 @@ public class XxlJobInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (StringUtils.isNotBlank(request.getHeader(XXL_JOB_ACCESS_TOKEN))) {
-            if (!jobProperties.isEnableProxy()) return true;
+        if (!jobProperties.isEnableProxy()) {
+            return true;
+        }
+        if (StringUtils.isNotBlank(request.getHeader(XXL_JOB_ACCESS_TOKEN)) && StringUtils.equalsIgnoreCase(request.getHeader(XXL_JOB_ACCESS_TOKEN), jobProperties.getAccessToken())) {
             String requestJson = httpInputStreamToJsonString(request);
             String nettyRequestUrl = "http://localhost:" + jobProperties.getExecutor().getPort() + request.getRequestURI();
             String uri = StringUtils.removeStart(request.getRequestURI(), "/");

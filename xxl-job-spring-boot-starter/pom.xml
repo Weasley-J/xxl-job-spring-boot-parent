@@ -11,7 +11,7 @@
 
     <groupId>io.github.weasley-j</groupId>
     <artifactId>xxl-job-spring-boot-starter</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <name>xxl-job-spring-boot-starter</name>
     <description>
         一个用于简化xxl-job配置的spring-boot组件，使用job客户端的http server
