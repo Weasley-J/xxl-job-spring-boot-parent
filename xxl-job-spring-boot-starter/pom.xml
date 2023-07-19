@@ -11,7 +11,7 @@
 
     <groupId>io.github.weasley-j</groupId>
     <artifactId>xxl-job-spring-boot-starter</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>xxl-job-spring-boot-starter</name>
     <description>
         一个用于简化xxl-job配置的spring-boot组件，使用job客户端的http server
@@ -28,7 +28,7 @@
         <maven-javadoc.version>3.4.0</maven-javadoc.version>
         <maven-gpg.version>3.0.1</maven-gpg.version>
         <!-- deploy end -->
-        <snakeyaml.version>1.33</snakeyaml.version>
+        <snakeyaml.version>2.0</snakeyaml.version>
         <hutool-all.version>5.8.10</hutool-all.version>
         <snakeyaml.version>2.0</snakeyaml.version>
         <xxl-job.version>2.4.0</xxl-job.version>
