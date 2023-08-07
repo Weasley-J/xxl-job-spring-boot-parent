@@ -7,6 +7,18 @@
 服务器上额外开通`xxl-job-core`内置的`netty服务器`的端口(`xxl.job.executor.port`)，`Job`客户端的服务器不需要开放`xxl-job`
 执行器的端口的安全组策略就能完成调度，增加开关控制(`xxl.job.enable-proxy`)，默认开启，组件不改变原`xxl-job`的任何特性。
 
+## 修改前后架构对比
+
+### 修改前
+
+![xxj-job-1 (1)](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/xxj-job-1%20(1).png)
+
+### 修改后
+
+![xxj-job-2](https://weasley.oss-cn-shanghai.aliyuncs.com/Photos/xxj-job-2.png)
+
+# 快速开始
+
 ## 1 添加pom依赖
 
 版本号在`maven`中央仓库获取
